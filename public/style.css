@@ -1,0 +1,176 @@
+/*共通 */
+h1 {
+  position: relative;
+  width: 80%;
+  background: #dfefff;
+  box-shadow: 0px 0px 0px 5px #dfefff;
+  border: dashed 2px white;
+  padding: 0.2em 0.5em;
+  color: #454545;
+  text-align :center;
+}
+  
+h1:after {
+  position: absolute;
+  content: '';
+  left: -7px;
+  top: -7px;
+  border-width: 0 0 15px 15px;
+  border-style: solid;
+  border-color: #fff #fff #a8d4ff;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.btn,
+a.btn,
+button.btn {
+  font-size: 1.0rem;
+  font-weight: 700;
+  line-height: 0.5;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 4rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #050505;
+  border-radius: 0.5rem;
+  border-color: #a7d6ff;
+  margin: 10px 10px;
+}
+
+/*ここからブルーゾーン*/
+.btn--blue,
+a.btn--blue {
+  color: #050505;
+  background-color: #b5d7ee;
+}
+.btn--blue:hover,
+a.btn--blue:hover {
+  color: #050505;
+  background: #b5d7ee;
+}
+
+a.btn--radius--blue {
+   border-radius: 100vh;
+}
+
+/*ここからグレーゾーン*/ 
+
+.btn--gray,
+a.btn--gray {
+  color: #fff;
+  background-color: #bdbbba;
+}
+
+.btn--gray:hover,
+a.btn--gray:hover {
+  color: rgb(255, 255, 255);
+  background: #bdbbba;
+}
+
+a.btn--radius--gray {
+  border-radius: 100vh;
+}
+
+/*ここからブラックゾーン */
+
+.btn2,
+a.btn2,
+button.btn2 {
+  font-size: 0.5rem;
+  font-weight: 700;
+  line-height: 0.5;
+  position: relative;
+  display: inline-block;
+  padding: 1rem 4rem;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #050505;
+  border-radius: 0.5rem;
+  border-color: #a7d6ff;
+  margin: 10px 10px;
+}
+
+.btn--black,
+a.btn--black {
+  color: #fff;
+  background-color: #000000;
+}
+
+.btn--black:hover,
+a.btn--black:hover {
+  color: rgb(255, 255, 255);
+  background: #000000;
+}
+
+a.btn--radius--black {
+  border-radius: 100vh;
+}
+
+/*タイトル */
+.title {
+    background: linear-gradient(transparent 70%, #a7d6ff 70%);
+}
+
+/*新規作成時のテキスト入力フォーム*/
+.form-control {
+  height: 2.4em;
+  width: 75%;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc inset;
+  appearance: none;
+  margin-right : 32px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin :10px 10px;
+
+}
+
+/*カーソル当てたら色付け*/
+.m-form-control:focus {
+  outline: 0;
+  box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
+
+}
+
+/*編集画面*/
+form-label {
+  position: relative;
+  padding: 1.5rem 1rem;
+  margin-right : 32px;
+}
+  
+form-label:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  content: '';
+  background-image: -webkit-repeating-linear-gradient(135deg, #000, #000 1px, transparent 2px, transparent 5px);
+  background-image: repeating-linear-gradient(-45deg, #000, #000 1px, transparent 2px, transparent 5px);
+  background-size: 7px 7px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
