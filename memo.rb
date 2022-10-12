@@ -82,3 +82,9 @@ delete '/memos/:id' do
 
   redirect '/memos'
 end
+
+helpers do
+  def h(text)
+    Rack::Utils.escape_html(text)
+  end
+end
