@@ -35,8 +35,7 @@ end
 # 特定のメモの内容を表示する画面
 get '/memos/:id' do
   memos = get_memos(FILE_PATH)
-  @title = memos[params[:id]]['title']
-  @content = memos[params[:id]]['content']
+  @memo = memos[params[:id]]
   @pagename = '内容表示'
   erb :show
 end
@@ -48,7 +47,7 @@ post '/memos' do
 
   memos = get_memos(FILE_PATH)
   id = (memos.keys.map(&:to_i).max + 1).to_s
-  memos[id] = { 'title' => title, 'content' => content }
+  memos[id] = { 'title': title, 'content': content }
 
   write_memos(FILE_PATH, memos)
 
@@ -58,8 +57,7 @@ end
 # 特定のメモの編集画面
 get '/memos/:id/edit' do
   memos = get_memos(FILE_PATH)
-  @title = memos[params[:id]]['title']
-  @content = memos[params[:id]]['content']
+  @memo = memos[params[:id]]
   @pagename = '編集'
   erb :edit
 end
@@ -70,7 +68,7 @@ patch '/memos/:id' do
   content = params[:content]
 
   memos = get_memos(FILE_PATH)
-  memos[params[:id]] = { 'title' => title, 'content' => content }
+  memos[params[:id]] = { 'title': title, 'content': content }
   write_memos(FILE_PATH, memos)
 
   redirect "/memos/#{params[:id]}"
