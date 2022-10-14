@@ -47,7 +47,7 @@ post '/memos' do
 
   memos = get_memos(FILE_PATH)
   id = (memos.keys.map(&:to_i).max + 1).to_s
-  memos[id] = { 'title': title, 'content': content }
+  memos[id] = { title: title, content: content }
 
   write_memos(FILE_PATH, memos)
 
@@ -64,11 +64,11 @@ end
 
 # 編集したメモを投稿
 patch '/memos/:id' do
-  title = h(params[:title])
-  content = h(params[:content])
+  title = params[:title]
+  content = params[:content]
 
   memos = get_memos(FILE_PATH)
-  memos[params[:id]] = { 'title': title, 'content': content }
+  memos[params[:id]] = { title: title, content: content }
   write_memos(FILE_PATH, memos)
 
   redirect "/memos/#{params[:id]}"
