@@ -42,8 +42,8 @@ end
 
 # 新規作成したメモを投稿
 post '/memos' do
-  title = h(params[:title])
-  content = h(params[:content])
+  title = params[:title]
+  content = params[:content]
 
   memos = get_memos(FILE_PATH)
   id = (memos.keys.map(&:to_i).max + 1).to_s

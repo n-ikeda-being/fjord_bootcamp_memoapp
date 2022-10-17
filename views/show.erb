@@ -1,5 +1,5 @@
-<p>タイトル：<%= @memo["title"] %></p>
-<p>内容：<%= @memo["content"] %></p>
+<p>タイトル：<%= h(@memo["title"]) %></p>
+<p>内容：<%= h(@memo["content"]) %></p>
 </div>
   <form action="/memos/<%= params[:id] %>/edit" method="get">
     <input type="submit" value="編集" class="btn btn--blue btn--radius--blue">
