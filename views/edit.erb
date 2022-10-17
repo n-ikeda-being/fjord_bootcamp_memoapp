@@ -1,12 +1,12 @@
 <form action="/memos/<%= params[:id] %>" method="post">
   <div>
     <label for="title" class="form-label">タイトル</label>
-    <textarea id="title" name="title" class="form-control"><%= h(@memo["title"]) %></textarea>
+    <textarea id="title" name="title" class="form-control"><%= @memo["title"] %></textarea>
     <input type="hidden" name="_method" value="patch">
   </div>
   <div>
     <label for="content" class="form-label">内容</label>
-    <textarea id="content" name="content" class="form-control"><%= h(@memo["content"]) %></textarea>
+    <textarea id="content" name="content" class="form-control"><%= @memo["content"] %></textarea>
     <input type="hidden" name="_method" value="patch">
   </div>
   <div>
