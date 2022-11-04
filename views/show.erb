@@ -1,0 +1,15 @@
+<p>タイトル：<%= h(@memo["title"]) %></p>
+<p>内容：<%= h(@memo["content"]) %></p>
+</div>
+  <form action="/memos/<%= params[:id] %>/edit" method="get">
+    <input type="submit" value="編集" class="btn btn--blue btn--radius--blue">
+  </form>
+  <div>
+  <form action="/memos/<%= params[:id] %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="削除" class="btn btn--gray btn--radius--gray">
+  </form>
+</div>
+<div>
+  <a class="btn2 btn--black btn--radius--black" href="/memos">メモ一覧に戻る</a>
+</div>
