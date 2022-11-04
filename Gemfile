@@ -8,6 +8,7 @@ gem 'redcarpet'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'webrick'
+gem 'pg'
 
 group :development do
   gem 'rubocop-fjord', require: false
