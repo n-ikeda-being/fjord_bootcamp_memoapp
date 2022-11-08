@@ -1,8 +1,8 @@
 <a class="btn btn--blue btn--radius--blue" href="/memos/new">メモを作成</a>
 <ul>
-  <% @memos.each do |id, post| %>
+  <% @memos.each do |post| %>
     <li>
-      <a href="/memos/<%= id %>"><%= h((post["title"])) %></a>
+      <a href="/memos/<%= post["id"] %>"><%= h((post["title"])) %></a>
     </li>
   <% end %>
 </ul>

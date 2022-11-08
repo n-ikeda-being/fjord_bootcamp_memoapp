@@ -3,6 +3,7 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
+require 'pg'
 
 FILE_PATH = 'public/memos.json'
 
@@ -14,13 +15,33 @@ def write_memos(file_path, memos)
   File.open(file_path, 'w') { |f| JSON.dump(memos, f) }
 end
 
+class Memo
+
+  def initialize
+    db = 'mydb'
+    host = 'localhost'
+    user ='username'
+    password = 'password'
+    port = 5432
+    @connect = PG::Connection.new(host: host, port: port, dbname: db, user: user, password: password)
+  end
+
+  def list
+    results = @connect.exec("SELECT * FROM memodates" )
+  end
+
+end
+
+memo = Memo.new
+
+
 get '/' do
   redirect '/memos'
 end
 
 # トップ画面
 get '/memos' do
-  @memos = get_memos(FILE_PATH)
+  @memos = memo.list
   @pagename = 'メモ一覧'
   erb :index
 end
