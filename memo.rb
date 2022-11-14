@@ -7,7 +7,7 @@ require 'pg'
 class Memo
   # dbに接続
   def initialize
-    db = 'mydb'
+    db = 'db'
     host = 'localhost'
     user = 'username'
     password = 'password'
@@ -19,8 +19,8 @@ class Memo
     @connect.exec('SELECT * FROM memodates ORDER BY id')
   end
 
-  def write(new_id, title, content)
-    @connect.exec('INSERT INTO memodates VALUES ($1, $2, $3)', [new_id, title, content])
+  def insert(title, content)
+    @connect.exec('INSERT INTO memodates(title, content) VALUES ($1, $2);', [title, content])
   end
 
   def update(id, title, content)
@@ -63,9 +63,7 @@ end
 post '/memos' do
   @memos = memo.list
 
-  id = @memos.map { |date| date['id'].to_i }
-  new_id = (id.max + 1)
-  memo.write(new_id, params['title'], params['content'])
+  memo.insert(params['title'], params['content'])
   redirect '/memos'
 end
 
