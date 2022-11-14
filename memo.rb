@@ -2,17 +2,37 @@
 
 require 'sinatra'
 require 'sinatra/reloader'
-require 'json'
+require 'pg'
 
-FILE_PATH = 'public/memos.json'
+class Memo
+  # dbに接続
+  def initialize
+    db = 'db'
+    host = 'localhost'
+    user = 'username'
+    password = 'password'
+    port = 5432
+    @connect = PG::Connection.new(host: host, port: port, dbname: db, user: user, password: password)
+  end
 
-def get_memos(file_path)
-  File.open(file_path, 'r') { |f| JSON.parse(f.read) }
+  def list
+    @connect.exec('SELECT * FROM memodates ORDER BY id')
+  end
+
+  def insert(title, content)
+    @connect.exec('INSERT INTO memodates(title, content) VALUES ($1, $2);', [title, content])
+  end
+
+  def update(id, title, content)
+    @connect.exec('update memodates set title=$2, content=$3 where id=$1', [id, title, content])
+  end
+
+  def delete(id)
+    @connect.exec('delete from memodates where id=$1', [id])
+  end
 end
 
-def write_memos(file_path, memos)
-  File.open(file_path, 'w') { |f| JSON.dump(memos, f) }
-end
+memo = Memo.new
 
 get '/' do
   redirect '/memos'
@@ -20,7 +40,7 @@ end
 
 # トップ画面
 get '/memos' do
-  @memos = get_memos(FILE_PATH)
+  @memos = memo.list
   @pagename = 'メモ一覧'
   erb :index
 end
@@ -34,51 +54,37 @@ end
 
 # 特定のメモの内容を表示する画面
 get '/memos/:id' do
-  memos = get_memos(FILE_PATH)
-  @memo = memos[params[:id]]
+  @memo = memo.list.find { |date| date['id'] == params['id'] }
   @pagename = '内容表示'
   erb :show
 end
 
 # 新規作成したメモを投稿
 post '/memos' do
-  title = params[:title]
-  content = params[:content]
+  @memos = memo.list
 
-  memos = get_memos(FILE_PATH)
-  id = (memos.keys.map(&:to_i).max + 1).to_s
-  memos[id] = { title: title, content: content }
-
-  write_memos(FILE_PATH, memos)
-
+  memo.insert(params['title'], params['content'])
   redirect '/memos'
 end
 
 # 特定のメモの編集画面
 get '/memos/:id/edit' do
-  memos = get_memos(FILE_PATH)
-  @memo = memos[params[:id]]
+  @memo = memo.list.find { |date| date['id'] == params['id'] }
   @pagename = '編集'
   erb :edit
 end
 
 # 編集したメモを投稿
 patch '/memos/:id' do
-  title = params[:title]
-  content = params[:content]
-
-  memos = get_memos(FILE_PATH)
-  memos[params[:id]] = { title: title, content: content }
-  write_memos(FILE_PATH, memos)
+  memo.update(params['id'], params['title'], params['content'])
+  @memos = memo.list
 
   redirect "/memos/#{params[:id]}"
 end
 
 # 特定のメモを削除
 delete '/memos/:id' do
-  memos = get_memos(FILE_PATH)
-  memos.delete(params[:id])
-  write_memos(FILE_PATH, memos)
+  memo.delete(params['id'])
 
   redirect '/memos'
 end

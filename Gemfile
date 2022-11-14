@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 # gem 'rails'
 gem 'puma'
+gem 'pg'
 gem 'redcarpet'
 gem 'sinatra'
 gem 'sinatra-contrib'
